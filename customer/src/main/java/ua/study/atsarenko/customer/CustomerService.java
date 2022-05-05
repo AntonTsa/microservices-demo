@@ -1,12 +1,17 @@
 package ua.study.atsarenko.customer;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import ua.study.atsarenko.clients.fraud.FraudCheckResponse;
 import ua.study.atsarenko.clients.fraud.FraudClient;
+import ua.study.atsarenko.clients.fraud.NotificationClient;
+import ua.study.atsarenko.clients.fraud.NotificationRequest;
 
 @Service
-public record CustomerService(CustomerRepository customerRepository, RestTemplate restTemplate, FraudClient fraudClient) {
+public record CustomerService(
+        CustomerRepository customerRepository,
+        FraudClient fraudClient,
+        NotificationClient notificationClient
+) {
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -26,5 +31,13 @@ public record CustomerService(CustomerRepository customerRepository, RestTemplat
         }
 
         //todo: send a notification
+
+        notificationClient.sendNotification(
+                new NotificationRequest(
+                        customer.getId(),
+                        customer.getEmail(),
+                        String.format("Welcome, %s", customer.getFirstName())
+                )
+        );
     }
 }
