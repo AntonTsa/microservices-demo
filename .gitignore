@@ -1,2 +1,6 @@
 # Project exclude paths
 /customer/target/
+/clients/target/
+/eureka-server/target/
+/fraud/target/
+/notification/target/
