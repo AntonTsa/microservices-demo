@@ -1,4 +1,4 @@
-package ua.study.atsarenko.notification;
+package ua.study.atsarenko.note;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package ua.study.atsarenko.notification;
+package ua.study.atsarenko.note;
 
 import org.springframework.stereotype.Service;
 import ua.study.atsarenko.clients.fraud.NotificationRequest;

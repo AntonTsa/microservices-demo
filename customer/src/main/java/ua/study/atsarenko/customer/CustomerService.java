@@ -1,16 +1,17 @@
 package ua.study.atsarenko.customer;
 
 import org.springframework.stereotype.Service;
+import ua.study.atsarenko.amqp.RabbitMQMessageProducer;
 import ua.study.atsarenko.clients.fraud.FraudCheckResponse;
 import ua.study.atsarenko.clients.fraud.FraudClient;
-import ua.study.atsarenko.clients.fraud.NotificationClient;
 import ua.study.atsarenko.clients.fraud.NotificationRequest;
 
 @Service
 public record CustomerService(
         CustomerRepository customerRepository,
         FraudClient fraudClient,
-        NotificationClient notificationClient
+        RabbitMQMessageProducer rabbitMQMessageProducer,
+        CustomerConfig config
 ) {
 
     public void registerCustomer(CustomerRegistrationRequest request) {
@@ -30,14 +31,16 @@ public record CustomerService(
             throw new IllegalStateException("fraudster");
         }
 
-        //todo: send a notification
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Welcome, %s", customer.getFirstName())
+        );
 
-        notificationClient.sendNotification(
-                new NotificationRequest(
-                        customer.getId(),
-                        customer.getEmail(),
-                        String.format("Welcome, %s", customer.getFirstName())
-                )
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                config.getInternalExchange(),
+                config.getInternalNotificationRoutingKey()
         );
     }
 }
