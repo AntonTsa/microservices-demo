@@ -1,7 +1,7 @@
 package ua.study.atsarenko.note;
 
 import org.springframework.stereotype.Service;
-import ua.study.atsarenko.clients.fraud.NotificationRequest;
+import ua.study.atsarenko.clients.note.NotificationRequest;
 
 import java.time.LocalDate;
 

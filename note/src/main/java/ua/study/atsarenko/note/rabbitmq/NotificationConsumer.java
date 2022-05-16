@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import ua.study.atsarenko.clients.fraud.NotificationRequest;
+import ua.study.atsarenko.clients.note.NotificationRequest;
 import ua.study.atsarenko.note.NotificationService;
 
 @Component

@@ -1,4 +1,4 @@
-package ua.study.atsarenko.clients.fraud;
+package ua.study.atsarenko.clients.note;
 
 public record NotificationRequest(
         Integer toCustomerId,

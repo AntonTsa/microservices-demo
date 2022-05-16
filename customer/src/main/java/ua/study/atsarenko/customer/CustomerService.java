@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ua.study.atsarenko.amqp.RabbitMQMessageProducer;
 import ua.study.atsarenko.clients.fraud.FraudCheckResponse;
 import ua.study.atsarenko.clients.fraud.FraudClient;
-import ua.study.atsarenko.clients.fraud.NotificationRequest;
+import ua.study.atsarenko.clients.note.NotificationRequest;
 
 @Service
 public record CustomerService(
